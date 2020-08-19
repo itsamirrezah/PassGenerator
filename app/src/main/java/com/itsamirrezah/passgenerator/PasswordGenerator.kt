@@ -15,7 +15,7 @@ class PasswordGenerator(
     private val symbols: List<String> = makeSymbols()
     private val numbers: List<String> = makeNumbers()
 
-    fun requestPassword(): List<String> {
+    fun requestPassword(): String {
         //How many options (switches) are active?
         val options = isUsingUppercase.toInt() + isUsingSymbols.toInt() + isUsingNumbers.toInt() +
                 isUsingLowercase.toInt()
@@ -24,7 +24,7 @@ class PasswordGenerator(
         generatePassword(optionsQuantity)
 
         password.shuffle()
-        return password.toList()
+        return password.joinToString("")
     }
 
     private fun generatePassword(optionsQuantity: List<Int>) {

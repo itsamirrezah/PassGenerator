@@ -19,7 +19,6 @@ class MainActivity : AppCompatActivity() {
         btnGenerate.setOnClickListener {
 
             setPrefManager()
-            resetValues()
 
             passwordGenerator = PasswordGenerator(
                 prefManager.passwordLength,
@@ -28,11 +27,8 @@ class MainActivity : AppCompatActivity() {
                 prefManager.isNumberUsing
             )
 
-            passwordGenerator.requestPassword().map {
-                tvPassword.append(it)
-            }
+            tvPassword.text = passwordGenerator.requestPassword()
         }
-
     }
 
     private fun setPrefManager() {
