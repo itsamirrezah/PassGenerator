@@ -1,5 +1,8 @@
 package com.itsamirrezah.passgenerator
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Build
 import android.service.quicksettings.TileService
 import android.widget.Toast
@@ -10,6 +13,12 @@ class PassGeneratorTile : TileService() {
 
     private lateinit var prefManager: PrefManager
     private lateinit var passwordGenerator: PasswordGenerator
+    private lateinit var clipboardManager: ClipboardManager
+
+    override fun onCreate() {
+        super.onCreate()
+        clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+    }
 
     override fun onClick() {
         super.onClick()
@@ -24,11 +33,18 @@ class PassGeneratorTile : TileService() {
         )
 
         val password = passwordGenerator.requestPassword()
+        pushOnClipboard(password)
 
         Toast.makeText(
             applicationContext,
-            "Copied to clipboard: $password",
+            "Copied to clipboard!",
             Toast.LENGTH_SHORT
         ).show()
     }
+
+    private fun pushOnClipboard(password: String) {
+        val data = ClipData.newPlainText("PassGenerator", password)
+        clipboardManager.setPrimaryClip(data)
+    }
+
 }

@@ -1,13 +1,17 @@
 package com.itsamirrezah.passgenerator
 
+import android.content.ClipData
+import android.content.ClipboardManager
+import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var passwordGenerator: PasswordGenerator
-    lateinit var prefManager: PrefManager
+    private lateinit var passwordGenerator: PasswordGenerator
+    private lateinit var prefManager: PrefManager
+    private lateinit var clipboardManager: ClipboardManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -15,6 +19,7 @@ class MainActivity : AppCompatActivity() {
 
         setSupportActionBar(toolbar)
         loadPrefManager()
+        setupClipboard()
 
         btnGenerate.setOnClickListener {
 
@@ -27,8 +32,14 @@ class MainActivity : AppCompatActivity() {
                 prefManager.isNumberUsing
             )
 
-            tvPassword.text = passwordGenerator.requestPassword()
+            val password = passwordGenerator.requestPassword()
+            tvPassword.text = password
+            pushOnClipboard(password)
         }
+    }
+
+    private fun setupClipboard() {
+        clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
     }
 
     private fun setPrefManager() {
@@ -46,8 +57,10 @@ class MainActivity : AppCompatActivity() {
         numbers.isChecked = prefManager.isNumberUsing
     }
 
-    private fun resetValues() {
-        tvPassword.text = ""
+    private fun pushOnClipboard(password: String) {
+        val data = ClipData.newPlainText("PassGenerator", password)
+        clipboardManager.setPrimaryClip(data)
     }
+
 
 }
