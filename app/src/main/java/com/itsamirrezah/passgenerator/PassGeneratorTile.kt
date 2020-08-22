@@ -18,12 +18,12 @@ class PassGeneratorTile : TileService() {
     override fun onCreate() {
         super.onCreate()
         clipboardManager = getSystemService(Context.CLIPBOARD_SERVICE) as ClipboardManager
+        prefManager = PrefManager.getInstance(this)
     }
 
     override fun onClick() {
         super.onClick()
 
-        prefManager = PrefManager.getInstance(this)
 
         passwordGenerator = PasswordGenerator(
             prefManager.passwordLength,

@@ -1,6 +1,6 @@
 package com.itsamirrezah.passgenerator
 
-import kotlin.random.Random
+import java.security.SecureRandom
 
 
 class PasswordGenerator(
@@ -20,7 +20,7 @@ class PasswordGenerator(
         val options = isUsingUppercase.toInt() + isUsingSymbols.toInt() + isUsingNumbers.toInt() +
                 isUsingLowercase.toInt()
 
-        val optionsQuantity = quantityByOptions(options)
+        val optionsQuantity = setQuantity(options)
         generatePassword(optionsQuantity)
 
         password.shuffle()
@@ -72,8 +72,10 @@ class PasswordGenerator(
     ) {
         val list = if (isSymbols) symbols else if (isNumber) numbers else letters
 
+        val secureRandom = SecureRandom()
+
         for (x in 0 until quantity) {
-            val randomInt = Random.nextInt(list.size)
+            val randomInt = secureRandom.nextInt(list.size)
             var element = list[randomInt]
             if (isUppercase)
                 element = element.toUpperCase()
@@ -89,22 +91,21 @@ class PasswordGenerator(
     //and later on, we generate the final password based on these 4 values
     //f.e: if we get a list<Int> with these numbers: [4,2,6,3]
     //the final password should have 4 symbols, 2 uppercase letter, 6 numbers and 3 lowercase letter
-    private fun quantityByOptions(options: Int): List<Int> {
+    private fun setQuantity(options: Int): List<Int> {
 
+        val secureRandom = SecureRandom()
         val optionsQuantity = mutableListOf<Int>()
-
         var limit: Int
         for (x in 1 until options) {
             val opLeft = options - x
             limit = pwLength - opLeft - optionsQuantity.sum()
-            val randomInt = Random.nextInt(1, limit)
+            val randomInt = secureRandom.nextInt(limit) + 1
             optionsQuantity.add(randomInt)
         }
         //put last value into the list
         optionsQuantity.add(pwLength - optionsQuantity.sum())
 
         optionsQuantity.shuffle()
-
         return optionsQuantity
     }
 
