@@ -7,4 +7,20 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="SliderTooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">#c3d0d6</item>
+        <item name="shapeAppearanceOverlay">@style/SliderTooltip.ShapeAppearanceOverlay</item>
+        <item name="android:textAppearance">@style/SliderTooltip.TextAppearance</item>
+    </style>
+
+
+    <style name="SliderTooltip.TextAppearance" parent="@style/TextAppearance.MaterialComponents.Tooltip">
+        <item name="android:textColor">#2c4651</item>
+    </style>
+
+    <style name="SliderTooltip.ShapeAppearanceOverlay">
+        <item name="cornerSize">50%</item>
+    </style>
+
 </resources>
