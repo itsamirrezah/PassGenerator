@@ -3,7 +3,9 @@ package com.itsamirrezah.passgenerator
 import android.content.ClipData
 import android.content.ClipboardManager
 import android.content.Context
+import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -17,7 +19,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         setSupportActionBar(toolbar)
+        setupBgAnimation()
         loadPrefManager()
         setupClipboard()
 
@@ -36,6 +40,14 @@ class MainActivity : AppCompatActivity() {
             tvPassword.text = password
             pushOnClipboard(password)
         }
+
+    }
+
+    private fun setupBgAnimation() {
+        val background = rootLayout.background as AnimationDrawable
+        background.setEnterFadeDuration(10)
+        background.setExitFadeDuration(3000)
+        background.start()
     }
 
     private fun setupClipboard() {
