@@ -6,6 +6,7 @@ import android.content.Context
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -39,6 +40,7 @@ class MainActivity : AppCompatActivity() {
             val password = passwordGenerator.requestPassword()
             tvPassword.text = password
             pushOnClipboard(password)
+            Toast.makeText(applicationContext, "Copied to clipboard!", Toast.LENGTH_SHORT).show()
         }
 
     }

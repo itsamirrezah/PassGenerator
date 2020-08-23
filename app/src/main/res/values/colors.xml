@@ -4,7 +4,7 @@
     <color name="colorPrimaryDark">#00ffffff</color>
     <color name="colorAccent">#c3d0d6</color>
 
-    <color name="gradientDark">#2c4651</color>
-    <color name="gradientMedium">#203A43</color>
+    <color name="gradientDark">#1b313a</color>
+    <color name="gradientMedium">#2c4651</color>
     <color name="gradientLight">#2C5364</color>
 </resources>

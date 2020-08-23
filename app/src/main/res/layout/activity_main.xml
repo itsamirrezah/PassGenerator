@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:theme="@style/ThemeOverlay.MaterialComponents.Dark"
-            app:title="Password Generator" />
+            app:title="Pass Generator" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -78,6 +78,7 @@
                         android:fontFamily="sans-serif-medium"
                         android:gravity="center"
                         android:text="Length"
+                        android:textStyle="bold"
                         android:textColor="@color/colorAccent"
                         android:textSize="14sp" />
 
@@ -109,7 +110,7 @@
                     android:layout_marginBottom="0dp"
                     android:fontFamily="sans-serif-medium"
                     android:text="Options"
-                    android:textColor="#fff"
+                    android:textColor="@color/colorAccent"
                     android:textSize="14sp"
                     android:textStyle="bold" />
 
